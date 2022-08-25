@@ -1,7 +1,9 @@
-const tracer = require("./tracing")("nodejs-opentelemetry");
+require("./tracing")("service-a");
 const express = require("express");
+const axios = require('axios');
 const { MongoClient } = require("mongodb");
 const port = process.env.PORT || 3000;
+const serviceBUrl = process.env.SERVICEB_URL || 'http://localhost:3001';
 const mongodbHost = process.env.MONGODB_HOST || 'localhost';
 const mongodbPort = process.env.MONGODB_PORT || 27017;
 const mongodbUrl = `mongodb://${mongodbHost}:${mongodbPort}`;
@@ -11,6 +13,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/todo", async (_, res) => {
+  const response = await axios.get(`${serviceBUrl}/get`)
   const todos = await db.collection("todos").find({}).toArray();
   res.send(todos);
 });

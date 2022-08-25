@@ -8,6 +8,7 @@ const { trace } = require("@opentelemetry/api");
 const { JaegerExporter } = require("@opentelemetry/exporter-jaeger");
 const { ConsoleSpanExporter } = require('@opentelemetry/sdk-trace-base');
 //Instrumentations
+const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node')
 const { ExpressInstrumentation } = require("opentelemetry-instrumentation-express");
 const { MongoDBInstrumentation } = require("@opentelemetry/instrumentation-mongodb");
 const { HttpInstrumentation } = require("@opentelemetry/instrumentation-http");
@@ -29,7 +30,7 @@ module.exports = (serviceName) => {
     instrumentations: [
       new HttpInstrumentation(),
       new ExpressInstrumentation(),
-      new MongoDBInstrumentation(),
+      new MongoDBInstrumentation()
     ],
     tracerProvider: provider,
   });
