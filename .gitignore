@@ -1,3 +1,8 @@
 /node_modules
-/data
+data/*
 .env
+/docker/signoz/clickhouse-setup/data/alertmanager/*
+/docker/signoz/clickhouse-setup/data/clickhouse/*
+/docker/signoz/clickhouse-setup/data/signoz/*
+
+!/**/.gitkeep

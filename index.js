@@ -1,4 +1,3 @@
-require("./tracing")("service-a");
 const express = require("express");
 const axios = require('axios');
 const { MongoClient } = require("mongodb");
